@@ -1,0 +1,38 @@
+.button {
+    display: inline;
+    width: 22.91%;
+    font: inherit;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #008b5d;
+    color: white;
+    background: #008b5d;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.button:hover,
+.button:active {
+    background: #13ac79;
+    border-color: #13ac79;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+}
+
+.button:focus {
+    outline: none;
+}
+
+
+.button:disabled {
+    background: #8f8f8f;
+    border-color: #8f8f8f;
+    cursor: default;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+}
+
+.button-form {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}

@@ -1,91 +1,62 @@
-import React, { Component } from 'react'
-import './Calculator.css' 
-import './ActiveButton'
-import './InactiveButton'
-import InactiveButton from './InactiveButton';
-import ActiveButton from './ActiveButton';
+import React, { useState, useRef } from "react";
 
-export class Calculator extends Component {
+import styles from "./Calculator.module.css";
+import buttonStyles from "./ui/Button.module.css";
+import InputField from "./InputField";
+import Operations from "./Operations";
+import Button from "./ui/Button";
 
-    constructor() {
-        super();
-        this.state = {
-            num1: '',
-            num2: '',
-            result: ''
-        }
-        this.add = this.add.bind(this)
+const Calculator = () => {
+  const [isDisabled, setIsDisabled] = useState(true);
+  const inputsRef = useRef([]);
+  const resultRef = useRef();
 
+  const checkDisabled = (value) => {
+    for (let i = 0; i < inputsRef.current.length; i++) {
+      if (inputsRef.current[i].value.trim() === "") {
+        setIsDisabled(true);
+        return;
+      }
     }
-
-    handlenum1 = (event) => {
-        this.setState({
-            num1: event.target.value
-        })
+    if (value.trim() !== "") {
+      setIsDisabled(false);
     }
+    return;
+  };
 
+  const clearResult = () => {
+    resultRef.current.value = "";
+  };
 
-    handlenum2 = (event) => {
-        this.setState({
-            num2: event.target.value
-        })
+  const assignResult = (value) => {
+    resultRef.current.value = value;
+  };
+
+  const addInputRef = (element) => {
+    if (element && !inputsRef.current.includes(element)) {
+      inputsRef.current.push(element);
     }
- 
-    add = (event) => {
-        this.setState({
-            result: this.state.num1 + " + " + this.state.num2 + " = " + (parseInt(this.state.num1) + parseInt(this.state.num2))
-        })
-    }
+  };
 
-    subtract = (event) => {
-        this.setState({
-            result: this.state.num1 + " - " + this.state.num2 + " = " + (parseInt(this.state.num1) - parseInt(this.state.num2))
-        })
-    }
+  return (
+    <div className={styles.card}>
+      <h2>Calculator</h2>
+      <div>
+        <InputField onChange={checkDisabled} ref={addInputRef} id="1" />
+        <InputField onChange={checkDisabled} ref={addInputRef} id="2" />
+        <Operations
+          ref={inputsRef}
+          result={assignResult}
+          isDisabled={isDisabled}
+        />
+      </div>
+      <label>Result</label>
+      <input data-testid="result-field" type="text" ref={resultRef} readOnly />
+      <Button className={buttonStyles.button} onClick={clearResult}>
+        Clear
+      </Button>
+    </div>
+  );
+};
 
-    multiply = (event) => {
-        this.setState({
-            result: this.state.num1 + " * " + this.state.num2 + " = " + (parseInt(this.state.num1) * parseInt(this.state.num2))
-        })
-    }
-
-    divide = (event) => {
-        this.setState({
-            result: this.state.num1 + " / " + this.state.num2 + " = " + (parseInt(this.state.num1) / parseInt(this.state.num2))
-        })
-    }
-
-    
-
-    
-
-    render() {
-
-        var checkInputField;
-       
-            if(this.state.num1 === '' || this.state.num2 === '') {
-                checkInputField = <InactiveButton />
-            } else {
-                checkInputField =  <ActiveButton calculator={this}/>
-            }
-
-        return (
-            <div className="outer-box">
-                <div align="left">
-                    Calculator
-                    <br /> <br />
-                </div>
-                Input 1: <input type="number" value={this.state.num1} onChange={this.handlenum1} placeholder="Enter number 1" />
-                <br /> <br />
-                Input 2: <input type="number" value={this.state.num2} onChange={this.handlenum2} placeholder="Enter number 2" />
-                <br /> <br />
-                {checkInputField}
-                <br /> <br />
-                Result: <input type="text" value={this.state.result} placeholder="Your result" readOnly />
-            </div>
-        )
-    }
-}
-
-export default Calculator
-
+export default Calculator;
