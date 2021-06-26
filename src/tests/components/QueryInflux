@@ -1,0 +1,22 @@
+
+lt_means_hrs - Lead Time - Mean - Rounded - Hours  (Result: 908h)
+select round(mean(lead_time) / (1000 * 60 * 60)) as lt_mean_hrs from aggregated_commits
+
+lt_mean_days - Lead Time - Mean - Rounded - Days  (Result: 38d)
+select round(mean(lead_time) / (1000 * 60 * 60 * 24)) as lt_mean_days from aggregated_commits
+
+lt_hrs - Lead Time - Each commit - Rounded - Hours
+select round(lead_time / (1000 * 60 * 60)) as lt_hrs from aggregated_commits
+
+lt_days - Lead Time - Each commit - Rounded - Days
+select round(lead_time / (1000 * 60 * 60 * 24)) as lt_days from aggregated_commits
+
+SELECT ALL THE ABOVE 4 IN QUERY
+select lt_hrs, lt_days, lt_mean_hrs, lt_mean_days from ( select lead_time / (1000 * 60 * 60) as lt_hrs from aggregated_commits), (select lead_time / (1000 * 60 * 60 * 24) as lt_days from aggregated_commits) , (select round(mean(lead_time) / (1000 * 60 * 60)) as lt_mean_hrs from aggregated_commits) , (select round(mean(lead_time) / (1000 * 60 * 60 * 24)) as lt_mean_days from aggregated_commits)
+
+
+select lt_hrs as result, lt_days as result, lt_mean_hrs as result, lt_mean_days as result from ( select (lead_time / (1000 * 60 * 60)) as lt_hrs from aggregated_commits), (select (lead_time / (1000 * 60 * 60 * 24)) as lt_days from aggregated_commits) , (select round(mean(lead_time) / (1000 * 60 * 60)) as lt_mean_hrs from aggregated_commits) , (select round(mean(lead_time) / (1000 * 60 * 60 * 24)) as lt_mean_days from aggregated_commits)
+
+
+select result from (select lt_hrs as result, lt_days as result, lt_mean_hrs as result, lt_mean_days as result_mean_days from ( select round(lead_time / (1000 * 60 * 60)) as lt_hrs from aggregated_commits), (select round(lead_time / (1000 * 60 * 60 * 24)) as lt_days from aggregated_commits) , (select round(mean(lead_time) / (1000 * 60 * 60)) as lt_mean_hrs from aggregated_commits) , (select round(mean(lead_time) / (1000 * 60 * 60 * 24)) as lt_mean_days from aggregated_commits)) WHERE result_mean_days > 0
+

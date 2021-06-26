@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "./ui/Button";
+import Button from "./Button";
 
-import styles from "./ui/Button.module.css";
+import styles from "./Button.module.css";
 
 const Operations = React.forwardRef((props, ref) => {
   const inputs = ref.current;

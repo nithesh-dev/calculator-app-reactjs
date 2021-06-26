@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
 
 import styles from "./Calculator.module.css";
-import buttonStyles from "./ui/Button.module.css";
+import buttonStyles from "./Button.module.css";
 import InputField from "./InputField";
 import Operations from "./Operations";
-import Button from "./ui/Button";
+import Button from "./Button";
 
 const Calculator = () => {
   const [isDisabled, setIsDisabled] = useState(true);

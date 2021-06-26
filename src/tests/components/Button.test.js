@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, configure } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-import Button from "../../../components/ui/Button"
+import Button from "../../components/Button"
 
 const mockfn = jest.fn();
 const props = {
