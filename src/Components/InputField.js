@@ -6,19 +6,19 @@ const InputField = React.forwardRef((props, ref) => {
   const [value, setValue] = useState("");
   const [errorMessage, setErrorMessage] = useState();
 
-  const onlyNumber = (event) => {
+  const isNumber = (event) => {
     const value = event.target.value;
     if (!isNaN(value)) {
       setValue(value);
       setErrorMessage();
+      props.onChange();
     } else {
       setErrorMessage(
-        <div data-testid="error-message" className={styles.errorMessage}>
+        <span data-testid="error-message" className={styles.errorMessage}>
           Error! Can enter only a number
-        </div>
+        </span>
       );
     }
-    props.onChange(value);
   };
 
   return (
@@ -33,7 +33,7 @@ const InputField = React.forwardRef((props, ref) => {
         value={value}
         ref={ref}
         placeholder={"Enter number " + props.id}
-        onChange={onlyNumber}
+        onChange={isNumber}
       />
     </div>
   );

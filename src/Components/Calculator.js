@@ -8,28 +8,28 @@ import Button from "./Button";
 
 const Calculator = () => {
   const [isDisabled, setIsDisabled] = useState(true);
+  const [isClearDisabled, setIsClearDisabled] = useState(true);
   const inputsRef = useRef([]);
   const resultRef = useRef();
 
-  const checkDisabled = (value) => {
+  const checkDisabled = () => {
     for (let i = 0; i < inputsRef.current.length; i++) {
       if (inputsRef.current[i].value.trim() === "") {
         setIsDisabled(true);
         return;
       }
     }
-    if (value.trim() !== "") {
-      setIsDisabled(false);
-    }
-    return;
+    setIsDisabled(false);
   };
 
   const clearResult = () => {
     resultRef.current.value = "";
+    setIsClearDisabled(true);
   };
 
   const assignResult = (value) => {
     resultRef.current.value = value;
+    setIsClearDisabled(false);
   };
 
   const addInputRef = (element) => {
@@ -52,7 +52,7 @@ const Calculator = () => {
       </div>
       <label>Result</label>
       <input data-testid="result-field" type="text" ref={resultRef} readOnly />
-      <Button className={buttonStyles.button} onClick={clearResult}>
+      <Button className={buttonStyles.button} onClick={clearResult} isDisabled={isClearDisabled}>
         Clear
       </Button>
     </div>
