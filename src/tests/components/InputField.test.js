@@ -8,13 +8,13 @@ const renderComponent = () => {
   return render(<InputField id={testProps.id} onChange={testProps.onChange} />);
 };
 
-describe("Input value", () => {
+describe("input value", () => {
   it("should render correctly", () => {
     const { queryByPlaceholderText } = renderComponent();
     expect(queryByPlaceholderText("Enter number " + testProps.id)).toBeTruthy();
   });
 
-  it("update on change", () => {
+  it("should update on change", () => {
     const { queryByPlaceholderText } = renderComponent();
 
     const inputField = queryByPlaceholderText("Enter number " + testProps.id);

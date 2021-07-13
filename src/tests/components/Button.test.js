@@ -12,7 +12,7 @@ const props = {
 
 configure({ adapter: new Adapter() });
 
-describe("Button component", () => {
+describe("button component", () => {
   it("should trigger with correct prop", () => {
     const wrapper = shallow(
       <Button
@@ -24,19 +24,4 @@ describe("Button component", () => {
 
     expect(wrapper.find('button').prop("id")).toBe("+");
   });
-//ToDo
-  // it("should not trigger the button when it is disabled", () => {
-
-  //   const wrapper = shallow(
-  //     <Button
-  //       id={props.id}
-  //       type="button"
-  //       isDisabled={props.isDisabled}
-  //       onClick={props.onClick}
-  //     />);
-
-  //   wrapper.find("button").simulate('click');
-
-  //   expect(mockfn).toHaveBeenCalledTimes(0);
-  // });
 });

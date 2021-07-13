@@ -6,14 +6,14 @@ const assignValueToInputs = (queryByPlaceholderText, input1, input2) => {
     fireEvent.change(queryByPlaceholderText("Enter number 2"), { target: { value: input2 } });
 }
 
-describe("Calculator component", () => {
+describe("calculator component", () => {
   it("should render result field correctly", () => {
     const { queryByTestId } = render(<Calculator />);
 
     expect(queryByTestId("result-field")).toBeTruthy();
   });
 
-  it("should result addtion value if inputs are added", () => {
+  it("should result addition value if inputs are added", () => {
     const { queryByTestId, queryByPlaceholderText, queryByText } = render(
       <Calculator />
     );
@@ -25,7 +25,7 @@ describe("Calculator component", () => {
     expect(queryByTestId("result-field").value).toBe("10 + 5 = 15");
   });
 
-  it("should result subtraction value if inputs are added", () => {
+  it("should result subtraction value if inputs are subtracted", () => {
     const { queryByTestId, queryByPlaceholderText, queryByText } = render(
       <Calculator />
     );
@@ -39,7 +39,7 @@ describe("Calculator component", () => {
     expect(queryByTestId("result-field").value).toBe("10 - 5 = 5");
   });
 
-  it("should result multiply value if inputs are added", () => {
+  it("should result multiplication value if inputs are multiplied", () => {
     const { queryByTestId, queryByPlaceholderText, queryByText } = render(
       <Calculator />
     );
@@ -52,7 +52,7 @@ describe("Calculator component", () => {
     expect(queryByTestId("result-field").value).toBe("10 * 5 = 50");
   });
 
-  it("should result division value if inputs are added", () => {
+  it("should result division value if inputs are divided", () => {
     const { queryByTestId, queryByPlaceholderText, queryByText } = render(
       <Calculator />
     );
@@ -95,7 +95,7 @@ describe("Calculator component", () => {
 
 });
 
-describe("Result field", () => {
+describe("result field", () => {
   it("should be empty when clear button is clicked", () => {
     const { queryByTestId, queryByPlaceholderText, queryByText } = render(
       <Calculator />
@@ -112,7 +112,7 @@ describe("Result field", () => {
     expect(resultField.value).toBe("");
   });
 
- describe("Clear field", () => {
+ describe("clear field", () => {
    it("should be disabled when result field is empty", () => {
     const { queryByTestId, queryByText } = render(
       <Calculator />

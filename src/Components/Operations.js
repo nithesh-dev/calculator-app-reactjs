@@ -6,28 +6,24 @@ import styles from "./Button.module.css";
 const Operations = React.forwardRef((props, ref) => {
   const inputs = ref.current;
 
-  const returnPropsResult = (input1, input2, operator, result) => {
-    props.result(input1 + " " + operator + " " + input2 + " = " + result);
+  const calculateResult = (input1, input2, operator, result) => {
+        props.result(String(input1).concat(" ", operator, " ", input2, " = ", result));
   };
-
-  const setResult = (result, operatorId) => {
-    returnPropsResult(inputs[0].value, inputs[1].value, operatorId, result);
-  };
-
+  
   const add = (value) => {
-    setResult(+inputs[0].value + +inputs[1].value, value.target.id);
+      calculateResult(inputs[0].value, inputs[1].value, value.target.id, +inputs[0].value + +inputs[1].value);
   };
 
   const subtract = (value) => {
-    setResult(+inputs[0].value - +inputs[1].value, value.target.id);
+      calculateResult(inputs[0].value, inputs[1].value, value.target.id, +inputs[0].value - +inputs[1].value);
   };
 
   const multiply = (value) => {
-    setResult(+inputs[0].value * +inputs[1].value, value.target.id);
+      calculateResult(inputs[0].value, inputs[1].value, value.target.id, +inputs[0].value * +inputs[1].value);
   };
 
   const divide = (value) => {
-    setResult(+inputs[0].value / +inputs[1].value, value.target.id);
+      calculateResult(inputs[0].value, inputs[1].value, value.target.id, +inputs[0].value / +inputs[1].value);
   };
 
   return (
